@@ -1822,9 +1822,9 @@ def printer(string, quiet=False, debug=False, error=False, **kwargs):
 def shell():
     """Run the full speedtest.net test"""
     global DEBUG
-    shutdown_event = threading.Event()#创建一个事件管理标志
+    shutdown_event = threading.Event()
 
-    signal.signal(signal.SIGINT, ctrl_c(shutdown_event))#按下ctrl_c执行ctrl_C
+    signal.signal(signal.SIGINT, ctrl_c(shutdown_event))
 
     args = parse_args()
 
