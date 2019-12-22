@@ -5,7 +5,11 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from math import *
-import sys, requests, time
+import sys, requests, time ,os
+
+#以下用于兼容pycharm
+os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = r'.\venv\Lib\site-packages\PyQt5\Qt\plugins'
+
 burl = "http://172.104.57.94:8000/polls/"
 #burl = "http://182.254.189.71:8000/polls/"
 purl = burl + "post/"
@@ -16,7 +20,6 @@ proxies = {
     'http': 'http://' + proxy,
     'https': 'https://' + proxy,
 }
-
 
 class PostThread(PyQt5.QtCore.QThread):
     '''继承于QThread，Post线程'''
@@ -152,6 +155,11 @@ class SpeedTestUI(QWidget):
         self.pushButtonStart.setMinimumHeight(50)
         self.pushButtonStart.move(150, 50)
         self.pushButtonStart.clicked.connect(self.downloadStart)
+
+        # 设置窗口图标
+        self.icon = QIcon()
+        self.icon.addPixmap(QPixmap("timg.ico"), QIcon.Normal, QIcon.Off)
+        self.setWindowIcon(self.icon)
 
         #窗口重绘定时器 此定时器用于更新显示
         self.systemTimer = QTimer()
